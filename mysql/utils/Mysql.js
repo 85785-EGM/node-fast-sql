@@ -1,3 +1,5 @@
+const Table = require('./Table')
+
 function parseKey (key) {
   return (key.match(/_[a-z]/g) ?? [])
     .map(s => s.replace('_', '').toUpperCase())
@@ -44,9 +46,10 @@ class Mysql {
     }, [])
 
     tables.forEach(async tableName => {
-      const query = await this.query(
-        'select * from `' + tableName + '` limit 0,1'
-      )
+      const row = await this.query('DESC `' + tableName + '`')
+      const columns = row.map(({ Field }) => Field)
+
+      this[tableName] = new Table(tableName, columns)
     })
   }
 }

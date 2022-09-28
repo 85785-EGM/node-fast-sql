@@ -1,0 +1,19 @@
+{
+  "name": "node-mysql",
+  "version": "0.0.1",
+  "description": "Quick query of mysql.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/85785-EGM/node-mysql.git"
+  },
+  "author": "yqming",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/85785-EGM/node-mysql/issues"
+  },
+  "homepage": "https://github.com/85785-EGM/node-mysql#readme"
+}

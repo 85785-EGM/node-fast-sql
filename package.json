@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/85785-EGM/node-mysql/issues"
   },
-  "homepage": "https://github.com/85785-EGM/node-mysql#readme"
+  "homepage": "https://github.com/85785-EGM/node-mysql#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }

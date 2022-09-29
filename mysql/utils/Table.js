@@ -104,18 +104,32 @@ class Table {
   }
   /**
    * 插入行
-   * @param columns 列对象列表，不能为空
+   * @param columns 列的name列表，不能为空
    * @param ...values 值列表，不能为空
    *  */
-  insert (columns = [], ...values) {}
+  insert (columns = [], ...values) {
+    const insertValue = values
+      .map(value => {
+        return `(${value.map(v => JSON.stringify(v)).join(',')})`
+      })
+      .join(',')
+    return `INSERT ${this.name} (${columns.join(',')}) VALUES ${insertValue}`
+  }
   /**
    * 删除选中的行
    *  */
-  remove () {}
+  delete () {
+    return `DELETE FROM ${this.name} WHERE ${this.row.condition}`
+  }
   /**
    * 更新选中的行
    *  */
-  update () {}
+  update (columns = [], values = []) {
+    const equalSql = columns.map((c, i) => this.getColumn(c).set(values[i]))
+    return `UPDATE ${this.name} SET ${equalSql.join(',')} WHERE ${
+      this.row.condition
+    }`
+  }
 
   get tableJoin () {
     return this._tableJoin.join(' ')

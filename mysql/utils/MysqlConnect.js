@@ -10,7 +10,6 @@ async function tryIt (func, count = 5, time = 50) {
     try {
       return await func()
     } catch (e) {
-      console.log(e)
       error = e
     }
     await delay(time)

@@ -31,7 +31,6 @@ class Column {
     this.showName = null
   }
   set (value) {
-    value = JSON.stringify(value)
     return `${this.name}=${value}`
   }
 }

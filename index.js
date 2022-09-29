@@ -1,9 +1,9 @@
-const Mysql = require('./dist/index')
+const Mysql = require('./mysql')
 const mysqlConfig = require('./config/mysql.json')
 
 const mysql = new Mysql(mysqlConfig)
 
-async function main () {
+async function select () {
   await mysql.waitConnect()
 
   const main = mysql.getTable('order')
@@ -23,4 +23,51 @@ async function main () {
   conn.release()
 }
 
-main()
+async function update () {
+  await mysql.waitConnect()
+
+  const main = mysql.getTable('order')
+  const column = main.getColumn('id')
+  const row = main.row
+
+  row.filter(column.equal(504))
+
+  const sql = main.update(['pull_date'], ['NOW()'])
+
+  const conn = await mysql.getConnect()
+  console.log(await conn.query(sql))
+  conn.release()
+}
+
+async function remove () {
+  await mysql.waitConnect()
+
+  const main = mysql.getTable('order')
+  const column = main.getColumn('id')
+  const row = main.row
+
+  row.filter(column.equal(440))
+
+  const sql = main.delete()
+
+  const conn = await mysql.getConnect()
+  console.log(await conn.query(sql))
+  conn.release()
+}
+
+async function insert () {
+  await mysql.waitConnect()
+
+  const main = mysql.getTable('password')
+
+  const sql = main.insert(
+    ['email', 'pswd'],
+    ['12345', 'asdf1234'],
+    ['54321', 'asdf1234']
+  )
+
+  const conn = await mysql.getConnect()
+  console.log(await conn.query(sql))
+  conn.release()
+}
+insert()

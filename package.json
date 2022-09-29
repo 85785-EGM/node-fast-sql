@@ -1,5 +1,5 @@
 {
-  "name": "mysql-sql",
+  "name": "node-fast-sql",
   "version": "0.0.1",
   "description": "Quick query of mysql.",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/85785-EGM/mysql-sql.git"
+    "url": "git+https://github.com/85785-EGM/fast-sql.git"
   },
   "keywords": [
     "node",
@@ -22,12 +22,13 @@
   "author": "yqming",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/85785-EGM/mysql-sql/issues"
+    "url": "https://github.com/85785-EGM/fast-sql/issues"
   },
-  "homepage": "https://github.com/85785-EGM/mysql-sql#readme",
+  "homepage": "https://github.com/85785-EGM/fast-sql#readme",
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "mysql": "^2.18.1",
+    "node-fast-sql": "^0.0.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-terser": "^7.0.2"
   }

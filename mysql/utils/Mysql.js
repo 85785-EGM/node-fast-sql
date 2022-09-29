@@ -38,6 +38,28 @@ class Mysql {
     }
   }
 
+  get queryOnce () {
+    const mysql = this._mysqlConnect.getConnObject()
+
+    return async function (...args) {
+      const _mysql = await mysql
+
+      return new Promise(async (resolve, reject) => {
+        let result = null
+        let err = false
+        try {
+          result = await _mysql.queryOnce(...args)
+        } catch (e) {
+          result = e
+          err = true
+        }
+        _mysql.release()
+        if (err) reject(result)
+        else resolve(result)
+      })
+    }
+  }
+
   async init () {
     await this._mysqlConnect.waitFunc
     let result = await this.query('show tables')

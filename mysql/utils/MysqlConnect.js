@@ -58,6 +58,14 @@ class MysqlConnect {
           })
         })
       },
+      queryOnce (sql, data) {
+        return new Promise((resolve, reject) => {
+          conn.query(sql, data, function (error, result) {
+            if (error) reject(error)
+            else resolve(result.shift())
+          })
+        })
+      },
       release () {
         return conn.release()
       }

@@ -14,8 +14,13 @@
     "type": "git",
     "url": "git+https://github.com/85785-EGM/mysql-sql.git"
   },
+  "keywords": [
+    "node",
+    "mysql",
+    "js"
+  ],
   "author": "yqming",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/85785-EGM/mysql-sql/issues"
   },

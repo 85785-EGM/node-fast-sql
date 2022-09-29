@@ -22,6 +22,10 @@ class Mysql {
   async query (sql) {
     return await this._mysql.query(sql)
   }
+
+  async getConnect () {
+    return await this._mysqlConnect.getConnObject()
+  }
 }
 
 module.exports = Mysql

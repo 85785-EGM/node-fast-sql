@@ -18,7 +18,9 @@ async function main () {
   main.showTableColumnAs('doctor', 'name', 'doctor_name')
 
   const sql = main.select()
-  console.log(await mysql.query(sql))
+  const conn = await mysql.getConnect()
+  console.log(await conn.queryOnce(sql))
+  conn.release()
 }
 
 main()

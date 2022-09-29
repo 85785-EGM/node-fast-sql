@@ -1,4 +1,4 @@
-const Mysql = require('node-fast-sql')
+const Mysql = require('./dist/index')
 const mysqlConfig = require('./config/mysql.json')
 
 const mysql = new Mysql(mysqlConfig)

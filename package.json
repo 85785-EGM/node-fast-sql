@@ -28,7 +28,7 @@
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "mysql": "^2.18.1",
-    "node-fast-sql": "^0.0.1",
+    "node-fast-sql": "^0.0.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-terser": "^7.0.2"
   }

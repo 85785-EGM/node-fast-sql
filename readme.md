@@ -5,6 +5,13 @@ A relatively complex tool for quickly building sql code
 ```javascript
 const Mysql = require('node-fast-sql')
 const mysqlConfig = require('./config/mysql.json')
+/*{
+  "host": "localhost",
+  "user": "root",
+  "password": "123456",
+  "database": "workbench",
+  "port": 3306
+}*/
 
 const mysql = new Mysql(mysqlConfig)
 

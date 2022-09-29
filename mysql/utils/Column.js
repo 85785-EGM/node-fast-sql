@@ -26,9 +26,11 @@ class Column {
   show (name = undefined) {
     if (!name) this.showName = this.name
     else this.showName = `${this.name} AS ${D}${name}${D}`
+    return this
   }
   hide () {
     this.showName = null
+    return this
   }
   set (value) {
     return `${this.name}=${value}`
@@ -36,6 +38,7 @@ class Column {
 
   clear () {
     this.showName = null
+    return this
   }
 }
 

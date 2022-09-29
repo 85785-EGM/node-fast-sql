@@ -16,6 +16,7 @@ class Row {
     this._condition = []
     this._limit = []
     this._order = []
+    return this
   }
 
   /**
@@ -23,18 +24,21 @@ class Row {
    *  */
   filter (affair) {
     this._condition.push(affair)
+    return this
   }
   filterOr (..._condition) {
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push(_condition[i], 'OR')
     this._condition.push(_condition[i])
+    return this
   }
   filterAnd (..._condition) {
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push(_condition[i], 'AND')
     this._condition.push(_condition[i])
+    return this
   }
 
   /**
@@ -42,18 +46,21 @@ class Row {
    *  */
   retain () {
     this._condition.push('NOT', affair)
+    return this
   }
   retainOr () {
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'OR')
     this._condition.push(_condition[i])
+    return this
   }
   retainAnd () {
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'AND')
     this._condition.push(_condition[i])
+    return this
   }
 
   /**
@@ -61,12 +68,14 @@ class Row {
    *  */
   limit (start, end) {
     this._limit = [start, end]
+    return this
   }
   /**
    * 排序
    *  */
   order (column, order) {
     this._order = [column.toString(), order.toUpperCase()]
+    return this
   }
 
   get condition () {

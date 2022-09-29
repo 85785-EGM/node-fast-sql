@@ -45,6 +45,7 @@ class Table {
     } else {
       this._tableJoin.push(`LEFT JOIN ${table.name} ON ${condition1}`)
     }
+    return this
   }
 
   joinRight (table, condition1, condition2) {
@@ -57,6 +58,7 @@ class Table {
     } else {
       this._tableJoin.push(`RIGHT JOIN ${table.name} ON ${condition1}`)
     }
+    return this
   }
 
   clone () {
@@ -65,10 +67,12 @@ class Table {
 
   showColumns (...columnNames) {
     this.showTableColumns(this._name, ...columnNames)
+    return this
   }
 
   showColumnAs (columnName, asName) {
     this.showTableColumns(this._name, columnName, asName)
+    return this
   }
 
   showTableColumns (tableName = this._name, ...columnNames) {
@@ -76,6 +80,7 @@ class Table {
       ({ _name }) => _name === tableName
     )
     columnNames.forEach(n => table.getColumn(n)?.show())
+    return this
   }
 
   showTableColumnAs (tableName = this._name, columnName, asName) {
@@ -83,6 +88,7 @@ class Table {
       ({ _name }) => _name === tableName
     )
     table.getColumn(columnName).show(asName)
+    return this
   }
 
   /** @private */
@@ -125,6 +131,7 @@ class Table {
     Object.values(this.columns).forEach(c => c.clear())
     this._tableJoin = []
     this._tableJoinClass = []
+    return this
   }
 
   /**

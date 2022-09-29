@@ -166,6 +166,10 @@ class Table {
     return result
   }
 
+  getJoinTable (name) {
+    return this._tableJoinClass.find(t => t._name === name)
+  }
+
   get tableJoin () {
     return this._tableJoin.join(' ')
   }

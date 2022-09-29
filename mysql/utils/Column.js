@@ -23,6 +23,9 @@ class Column {
     value = JSON.stringify(value)
     return `${this.name}=${value}`
   }
+  conditionShow (condition, name = '') {
+    this.showName = `${condition} AS ${D}${name}${D}`
+  }
   show (name = undefined) {
     if (!name) this.showName = this.name
     else this.showName = `${this.name} AS ${D}${name}${D}`

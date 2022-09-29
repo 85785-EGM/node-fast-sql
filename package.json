@@ -1,22 +1,29 @@
 {
-  "name": "node-mysql",
+  "name": "mysql-sql",
   "version": "0.0.1",
   "description": "Quick query of mysql.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/85785-EGM/node-mysql.git"
+    "url": "git+https://github.com/85785-EGM/mysql-sql.git"
   },
   "author": "yqming",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/85785-EGM/node-mysql/issues"
+    "url": "https://github.com/85785-EGM/mysql-sql/issues"
   },
-  "homepage": "https://github.com/85785-EGM/node-mysql#readme",
+  "homepage": "https://github.com/85785-EGM/mysql-sql#readme",
   "dependencies": {
-    "mysql": "^2.18.1"
+    "@rollup/plugin-json": "^4.1.0",
+    "mysql": "^2.18.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }

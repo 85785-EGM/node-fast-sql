@@ -33,6 +33,10 @@ class Column {
   set (value) {
     return `${this.name}=${value}`
   }
+
+  clear () {
+    this.showName = null
+  }
 }
 
 module.exports = Column

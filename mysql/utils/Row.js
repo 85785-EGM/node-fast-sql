@@ -12,6 +12,12 @@ class Row {
     this._order = []
   }
 
+  clear () {
+    this._condition = []
+    this._limit = []
+    this._order = []
+  }
+
   /**
    * 保留符合条件的
    *  */

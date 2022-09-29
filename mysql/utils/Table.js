@@ -85,11 +85,8 @@ class Table {
     table.getColumn(columnName).show(asName)
   }
 
-  /**
-   * 返回匹配的行，并按column输出
-   * @param column * 输出所有列
-   *  */
-  select (column) {
+  /** @private */
+  _select (column) {
     if (column === '*') {
       return `SELECT * FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
     } else {
@@ -102,12 +99,8 @@ class Table {
       return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
     }
   }
-  /**
-   * 插入行
-   * @param columns 列的name列表，不能为空
-   * @param ...values 值列表，不能为空
-   *  */
-  insert (columns = [], ...values) {
+  /** @private */
+  _insert (columns = [], ...values) {
     const insertValue = values
       .map(value => {
         return `(${value.map(v => JSON.stringify(v)).join(',')})`
@@ -115,20 +108,55 @@ class Table {
       .join(',')
     return `INSERT ${this.name} (${columns.join(',')}) VALUES ${insertValue}`
   }
-  /**
-   * 删除选中的行
-   *  */
-  delete () {
+  /** @private */
+  _delete () {
     return `DELETE FROM ${this.name} WHERE ${this.row.condition}`
   }
-  /**
-   * 更新选中的行
-   *  */
-  update (columns = [], values = []) {
+  /** @private */
+  _update (columns = [], values = []) {
     const equalSql = columns.map((c, i) => this.getColumn(c).set(values[i]))
     return `UPDATE ${this.name} SET ${equalSql.join(',')} WHERE ${
       this.row.condition
     }`
+  }
+
+  clear () {
+    this.row.clear()
+    Object.values(this.columns).forEach(c => c.clear())
+    this._tableJoin = []
+    this._tableJoinClass = []
+  }
+
+  /**
+   * 返回匹配的行，并按column输出
+   * @param column * 输出所有列
+   */
+  select (column) {
+    const result = this._select(column)
+    this.clear()
+    return result
+  }
+  /**
+   * 插入行
+   * @param columns 列的name列表，不能为空
+   * @param ...values 值列表，不能为空
+   */
+  insert (columns = [], ...values) {
+    const result = this._insert(columns, ...values)
+    this.clear()
+    return result
+  }
+  /** 删除选中的行 */
+  delete () {
+    const result = this.delete()
+    this.clear()
+    return result
+  }
+  /** 更新选中的行 */
+  update (columns = [], values = []) {
+    const result = this._update(columns, values)
+    this.clear()
+    return result
   }
 
   get tableJoin () {

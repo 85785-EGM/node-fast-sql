@@ -1,40 +1,38 @@
 const D = '`'
+
 class Column {
   constructor (table, name) {
+    /** @private */
     this._name = name
+    /** @private */
     this._table = table
-    this.quote = `${D}${this.tableName}${D}.${D}${this._name}${D}`
+    this.showName = null
   }
 
   get name () {
-    return this._name
-  }
-
-  get tableName () {
-    return this._table.name
-  }
-
-  toString () {
-    return this._name
+    return `${this._table.name}.${D}${this._name}${D}`
   }
 
   isnull () {
-    return `ISNULL(${this.quote})`
+    return `ISNULL(${this.name})`
   }
   equalColumn (column) {
-    return `${this.quote}=${column.toString()}`
+    return `${this.name}=${column.name}`
   }
   equal (value) {
     value = JSON.stringify(value)
-    return `${this.quote}=${value}`
+    return `${this.name}=${value}`
   }
   show (name = undefined) {
-    if (!name) return this.quote
-    else return `${this.quote} AS ${name}`
+    if (!name) this.showName = this.name
+    else this.showName = `${this.name} AS ${D}${name}${D}`
+  }
+  hide () {
+    this.showName = null
   }
   set (value) {
     value = JSON.stringify(value)
-    return `${this.quote}=${value}`
+    return `${this.name}=${value}`
   }
 }
 

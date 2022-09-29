@@ -11,8 +11,9 @@ function parseKey (key) {
 class Mysql {
   constructor (mysqlConnect) {
     this._mysqlConnect = mysqlConnect
+    this.table = {}
 
-    mysqlConnect.waitFunc.then(this.init.bind(this))
+    this.waitFunc = this.init()
   }
 
   get query () {
@@ -38,6 +39,7 @@ class Mysql {
   }
 
   async init () {
+    await this._mysqlConnect.waitFunc
     let result = await this.query('show tables')
 
     const tables = result.reduce((pre, current) => {
@@ -45,12 +47,13 @@ class Mysql {
       return pre
     }, [])
 
-    tables.forEach(async tableName => {
-      const row = await this.query('DESC `' + tableName + '`')
-      const columns = row.map(({ Field }) => Field)
-
-      this[tableName] = new Table(tableName, columns)
-    })
+    await Promise.all(
+      tables.map(async tableName => {
+        const row = await this.query('DESC `' + tableName + '`')
+        const columns = row.map(({ Field }) => Field)
+        this.table[tableName] = new Table(tableName, columns)
+      })
+    )
   }
 }
 

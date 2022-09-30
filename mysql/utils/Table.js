@@ -33,7 +33,6 @@ class Table {
    * @param {Table} table
    * @param {String} condition
    * @param {String} condition
-   * @returns
    */
   joinLeft (table, condition1, condition2) {
     this._tableJoinClass.push(table)

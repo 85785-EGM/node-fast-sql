@@ -1,4 +1,4 @@
-const Mysql = require('./mysql')
+const Mysql = require('./dist/index')
 const mysqlConfig = require('./config/mysql.json')
 
 const mysql = new Mysql(mysqlConfig)
@@ -8,19 +8,21 @@ async function select () {
 
   const main = mysql.getTable('order')
   const column = main.getColumn('id')
-  const row = main.row
+  main.row.filterAnd(column.equal(504))
 
-  main.joinLeft(mysql.getTable('doctor'), 'doctor_id', 'id')
-  row.filter(column.equal(504))
+  main
+    .joinLeft(mysql.getTable('doctor'), 'doctor_id', 'id')
 
-  main.showColumns('id', 'number')
-  main.showTableColumns('doctor', 'name')
-  main.showTableColumnAs('doctor', 'name', 'doctor_name')
+    .showColumns('id', 'number')
+    .showTableColumns('doctor', 'name')
+    .showTableColumnAs('doctor', 'name', 'doctor_name')
 
   const sql = main.select()
   const conn = await mysql.getConnect()
   console.log(await conn.queryOnce(sql))
   conn.release()
+
+  console.log(main.getJoinTable)
 }
 
 async function update () {
@@ -70,4 +72,4 @@ async function insert () {
   console.log(await conn.query(sql))
   conn.release()
 }
-insert()
+select()

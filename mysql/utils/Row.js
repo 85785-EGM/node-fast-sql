@@ -70,7 +70,8 @@ class Row {
    * 排序
    *  */
   orderBy (column, order) {
-    this._order = [column.toString(), order.toUpperCase()]
+    if (!column?.name) this._order = []
+    this._order = [column.name, order.toUpperCase()]
     return this
   }
 

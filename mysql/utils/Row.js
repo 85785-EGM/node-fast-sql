@@ -69,7 +69,7 @@ class Row {
   /**
    * 排序
    *  */
-  order (column, order) {
+  orderBy (column, order) {
     this._order = [column.toString(), order.toUpperCase()]
     return this
   }

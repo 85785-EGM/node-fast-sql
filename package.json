@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "start": "node index",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "push": "rollup -c && npm publish"
   },
   "repository": {
     "type": "git",

@@ -92,21 +92,21 @@ class Table {
 
   /** @private */
   _select (column) {
-    if (column === '*') {
-      return `SELECT * FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
-    } else {
-      const columnName = [this, ...this._tableJoinClass]
+    let columnName = '*'
+
+    if (column !== '*') {
+      columnName = [this, ...this._tableJoinClass]
         .flatMap(({ columns }) => {
           return Object.values(columns).map(({ showName }) => showName)
         })
         .filter(n => n)
         .join(', ')
-
-      if (/^ *$/.test(this.row.sql))
-        return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin}`
-      else
-        return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
     }
+
+    if (/^ *$/.test(this.row.sql))
+      return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin}`
+    else
+      return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
   }
   /** @private */
   _insert (columns = [], ...values) {

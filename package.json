@@ -1,6 +1,6 @@
 {
   "name": "node-fast-sql",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Quick query of mysql.",
   "main": "dist/index.js",
   "files": [

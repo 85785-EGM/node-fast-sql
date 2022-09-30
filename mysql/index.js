@@ -16,7 +16,7 @@ class Mysql {
 
   /** @returns {import("./utils/Table.js")} */
   getTable (name) {
-    return this._mysql.table[name]
+    return this._mysql.table[name].clone()
   }
 
   async query (sql) {

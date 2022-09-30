@@ -22,11 +22,8 @@ class Row {
   /**
    * 保留符合条件的
    *  */
-  filter (affair) {
-    this._condition.push(affair)
-    return this
-  }
   filterOr (..._condition) {
+    if (this._condition.length > 0) this._condition.push('OR')
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push(_condition[i], 'OR')
@@ -34,6 +31,7 @@ class Row {
     return this
   }
   filterAnd (..._condition) {
+    if (this._condition.length > 0) this._condition.push('AND')
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push(_condition[i], 'AND')
@@ -44,11 +42,8 @@ class Row {
   /**
    * 保留不符合条件的
    *  */
-  retain () {
-    this._condition.push('NOT', affair)
-    return this
-  }
   retainOr () {
+    if (this._condition.length > 0) this._condition.push('OR')
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'OR')
@@ -56,6 +51,7 @@ class Row {
     return this
   }
   retainAnd () {
+    if (this._condition.length > 0) this._condition.push('AND')
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'AND')

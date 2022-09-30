@@ -13,6 +13,9 @@ class Column {
     return `${this._table.name}.${D}${this._name}${D}`
   }
 
+  in (condition) {
+    return `${this.name} IN (${condition})`
+  }
   isnull () {
     return `ISNULL(${this.name})`
   }

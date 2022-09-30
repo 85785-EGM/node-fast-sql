@@ -42,7 +42,7 @@ class Row {
   /**
    * 保留不符合条件的
    *  */
-  retainOr () {
+  retainOr (..._condition) {
     if (this._condition.length > 0) this._condition.push('OR')
     let i = 0,
       count = _condition - 1
@@ -50,7 +50,7 @@ class Row {
     this._condition.push(_condition[i])
     return this
   }
-  retainAnd () {
+  retainAnd (..._condition) {
     if (this._condition.length > 0) this._condition.push('AND')
     let i = 0,
       count = _condition - 1

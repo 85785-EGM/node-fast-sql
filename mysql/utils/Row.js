@@ -47,7 +47,7 @@ class Row {
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'OR')
-    this._condition.push(_condition[i])
+    this._condition.push('NOT', _condition[i])
     return this
   }
   retainAnd (..._condition) {
@@ -55,7 +55,7 @@ class Row {
     let i = 0,
       count = _condition - 1
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'AND')
-    this._condition.push(_condition[i])
+    this._condition.push('NOT', _condition[i])
     return this
   }
 

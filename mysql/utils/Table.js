@@ -40,7 +40,7 @@ class Table {
       const condition = this.getColumn(condition1).equalColumn(
         table.getColumn(condition2)
       )
-      this._tableJoin.push(`RIGHT JOIN ${table.name} ON ${condition}`)
+      this._tableJoin.push(`LEFT JOIN ${table.name} ON ${condition}`)
     } else {
       this._tableJoin.push(`LEFT JOIN ${table.name} ON ${condition1}`)
     }
@@ -101,7 +101,11 @@ class Table {
         })
         .filter(n => n)
         .join(', ')
-      return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
+
+      if (/^ *$/.test(this.row.sql))
+        return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin}`
+      else
+        return `SELECT ${columnName} FROM ${this.name} ${this.tableJoin} WHERE ${this.row.sql}`
     }
   }
   /** @private */
@@ -120,9 +124,13 @@ class Table {
   /** @private */
   _update (columns = [], values = []) {
     const equalSql = columns.map((c, i) => this.getColumn(c).set(values[i]))
-    return `UPDATE ${this.name} SET ${equalSql.join(',')} WHERE ${
-      this.row.condition
-    }`
+
+    if (/^ *$/.test(this.row.condition))
+      return `UPDATE ${this.name} SET ${equalSql.join(',')}`
+    else
+      return `UPDATE ${this.name} SET ${equalSql.join(',')} WHERE ${
+        this.row.condition
+      }`
   }
 
   clear () {

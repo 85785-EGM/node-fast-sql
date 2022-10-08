@@ -42,6 +42,10 @@ class Column {
     return `${this.name}=${value}`
   }
 
+  re (regexp) {
+    return `${this.name} REGEXP '${regexp}'`
+  }
+
   clear () {
     this.showName = null
     return this

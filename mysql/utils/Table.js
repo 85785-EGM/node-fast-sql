@@ -162,7 +162,7 @@ class Table {
   }
   /** 删除选中的行 */
   delete () {
-    const result = this.delete()
+    const result = this._delete()
     this.clear()
     return result
   }

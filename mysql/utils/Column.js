@@ -13,6 +13,9 @@ class Column {
     return `${this._table.name}.${D}${this._name}${D}`
   }
 
+  notIn (condition) {
+    return `${this.name} IN (${condition})`
+  }
   in (condition) {
     return `${this.name} IN (${condition})`
   }

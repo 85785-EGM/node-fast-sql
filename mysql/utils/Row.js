@@ -10,6 +10,11 @@ class Row {
     this._limit = []
     /** @private */
     this._order = []
+
+    this.filterOr = this._filterOr.bind(this, 'OR')
+    this.filterAnd = this._filterAnd.bind(this, 'AND')
+    this.retainOr = this._retainOr.bind(this, 'OR')
+    this.retainAnd = this._retainAnd.bind(this, 'AND')
   }
 
   clear () {
@@ -22,8 +27,8 @@ class Row {
   /**
    * 保留符合条件的
    *  */
-  filterOr (..._condition) {
-    if (this._condition.length > 0) this._condition.push('OR')
+  _filterOr (before, ..._condition) {
+    if (this._condition.length > 0) this._condition.push(before)
     let i = 0,
       count = _condition.length - 1
     if (count > 0) this._condition.push('(')
@@ -32,8 +37,8 @@ class Row {
     if (count > 0) this._condition.push(')')
     return this
   }
-  filterAnd (..._condition) {
-    if (this._condition.length > 0) this._condition.push('AND')
+  _filterAnd (before, ..._condition) {
+    if (this._condition.length > 0) this._condition.push(before)
     let i = 0,
       count = _condition.length - 1
     if (count > 0) this._condition.push('(')
@@ -46,8 +51,8 @@ class Row {
   /**
    * 保留不符合条件的
    *  */
-  retainOr (..._condition) {
-    if (this._condition.length > 0) this._condition.push('OR')
+  _retainOr (before, ..._condition) {
+    if (this._condition.length > 0) this._condition.push(before)
     let i = 0,
       count = _condition.length - 1
     if (count > 0) this._condition.push('(')
@@ -56,8 +61,8 @@ class Row {
     if (count > 0) this._condition.push(')')
     return this
   }
-  retainAnd (..._condition) {
-    if (this._condition.length > 0) this._condition.push('AND')
+  _retainAnd (before, ..._condition) {
+    if (this._condition.length > 0) this._condition.push(before)
     let i = 0,
       count = _condition.length - 1
     if (count > 0) this._condition.push('(')

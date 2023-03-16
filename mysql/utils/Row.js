@@ -25,17 +25,21 @@ class Row {
   filterOr (..._condition) {
     if (this._condition.length > 0) this._condition.push('OR')
     let i = 0,
-      count = _condition - 1
+      count = _condition.length - 1
+    if (count > 0) this._condition.push('(')
     for (; i < count; i++) this._condition.push(_condition[i], 'OR')
     this._condition.push(_condition[i])
+    if (count > 0) this._condition.push(')')
     return this
   }
   filterAnd (..._condition) {
     if (this._condition.length > 0) this._condition.push('AND')
     let i = 0,
-      count = _condition - 1
+      count = _condition.length - 1
+    if (count > 0) this._condition.push('(')
     for (; i < count; i++) this._condition.push(_condition[i], 'AND')
     this._condition.push(_condition[i])
+    if (count > 0) this._condition.push(')')
     return this
   }
 
@@ -45,17 +49,21 @@ class Row {
   retainOr (..._condition) {
     if (this._condition.length > 0) this._condition.push('OR')
     let i = 0,
-      count = _condition - 1
+      count = _condition.length - 1
+    if (count > 0) this._condition.push('(')
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'OR')
     this._condition.push('NOT', _condition[i])
+    if (count > 0) this._condition.push(')')
     return this
   }
   retainAnd (..._condition) {
     if (this._condition.length > 0) this._condition.push('AND')
     let i = 0,
-      count = _condition - 1
+      count = _condition.length - 1
+    if (count > 0) this._condition.push('(')
     for (; i < count; i++) this._condition.push('NOT', _condition[i], 'AND')
     this._condition.push('NOT', _condition[i])
+    if (count > 0) this._condition.push(')')
     return this
   }
 
